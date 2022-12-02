@@ -1,7 +1,10 @@
 class Admin::GenresController < ApplicationController
+before_action :authenticate_admin!, except: [:show, :index]
+
   def index
     @genre = Genre.new
     @genres = Genre.all.page(params[:page]).per(10)
+    # perでindexで表示する列数を決める
   end
 
   def create
@@ -16,6 +19,17 @@ class Admin::GenresController < ApplicationController
   end
 
   def edit
+    @genre = Genre.find(params[:id])
+  end
+
+  def update
+    @genre = Genre.find(params[:id])
+    if @genre.update(genre_params)
+      flash[:success] = "ジャンルを変更しました"
+      redirect_to admin_genres_path
+    else
+       render :edit and return
+    end
   end
 
   private

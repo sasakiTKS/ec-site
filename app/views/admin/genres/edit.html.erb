@@ -1,2 +1,21 @@
-<h1>Admin::Genres#edit</h1>
-<p>Find me in app/views/admin/genres/edit.html.erb</p>
+<!--% provide(:title, "ジャンル編集") %-->
+
+<div class="container">
+<div class="row">
+<div class="col-xs-12">
+ <h2 class="head-line title_h2 text-center bg-light" >ジャンル編集</h2>
+  <%= render "layouts/error_messages", resource: @genre %>
+  <%= form_with model: @genre, url: admin_genre_path(@genre), class: "form-inline", local: true do |f| %>
+      <span class="form-inline" ><%= f.label :"ジャンル名" %></span>
+      <span class="form-inline" ><%= f.text_field :name, class: 'form-control user_name' %></span>
+      <span class="form-inline" ><%= f.submit value="変更を保存", class: 'btn btn-success' %></span>
+  <% end %>
+  <!--%= form_for @genre, :url => {:action => :update} do |f| %-->
+  <!--<div>-->
+  <!--  ジャンル-->
+  <!--%= f.text_field :name  %-->
+  <!--%= f.submit "変更を保存する", class: "btn btn-info" %-->
+  <!--</div>-->
+</div>
+</div>
+</div>

@@ -1,0 +1,47 @@
+<!--% provide(:title, "商品編集") %-->
+<h2 class="head-line title_h2 text-center">商品編集</h2>
+<div class="row">
+
+  <%= form_with model: @item, url: admin_item_path(@item), local: true, method: :patch, class: "form-horizontal" do |f| %>
+  <!--%= form_for(@product, url: admin_product_path, method: :patch, class: "form-horizontal") do |f| %-->
+    <!--%= render "layouts/error_messages", resource: @product%-->
+    <div class="col-xs-4">
+      <div class="img_field">
+        <!--%= attachment_image_tag(@product, :image, size: "250x180") %-->
+          	      <%= f.file_field :image, accept: "image/*" %>
+
+          <%= f.submit '投稿' %>
+      </div>
+      <div class="form-group">
+	      <!--%= f.attachment_field :image, class: " image" %-->
+      </div>
+    </div>
+
+    <div class="col-xs-6">
+      <div class="form-group">
+      <%= f.label :"商品名", class: "col-sm-3 control-label" %>
+      <%= f.text_field :name, class: "col-sm-9 form-control-static name" %>
+      </div>
+      <div class="form-group">
+      <%= f.label :"商品説明", class: "col-sm-3 control-label" %>
+      <%= f.text_area :introduction, class: "col-sm-9 control-label explanation" %>
+      </div>
+      <div class="form-group">
+      <%= f.label :"ジャンル", class: "col-sm-3 control-label" %>
+      <%= f.collection_select(:genre_id, @genres, :id, :name, prompt: "-- 選択してください --", class: "col-sm-9 genre_id") %>
+      </div>
+      <div class="form-group">
+      <%= f.label :"税抜価格", class: "col-sm-3 control-label" %>
+      <%= f.text_field :price, class: "col-sm-3 form-control-static price" %>円
+      </div>
+      <div class="form-group">
+      <%= f.label :"販売ステータス", class: "col-sm-3 control-label" %>
+      <%= f.select :is_active, [['販売中', true], ['販売停止', false]], prompt: "-- 選択してください --", class: "col-sm-9 is_sale" %>
+      </div>
+      <div class="actions">
+	      <%= f.submit "変更を保存", class: "btn btn-primary pull-right" %>
+      </div>
+
+    </div>
+  <% end %>
+</div>
