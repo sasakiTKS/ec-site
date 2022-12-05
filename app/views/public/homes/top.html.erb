@@ -1,0 +1,62 @@
+<% provide(:title, "ホーム") %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <table class="genre-table table table-bordered table-hover">
+  <thead class="genre-thead">
+    <tr>
+      <th class="active">ジャンル検索</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @genres.each do |genre| %>
+      <tr>
+        <td>
+          <%= link_to @items_path do %>
+            <%= genre.name %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+ </table>
+    </div>
+
+    <div class="col-md-9">
+      <div class="top-box">
+        <p class="top-text">
+          ようこそ、ながのCAKEへ！<br>
+          このサイトは、ケーキ販売のECサイトになります。<br>
+          会員でない方も商品の閲覧はできますが、<br>
+          購入には会員登録が必要になります。<br>
+        </p>
+      </div>
+
+      <div class="recommend-title">
+        <h3>新着商品</h3>
+      </div>
+      <div class="recommend-container ">
+        <div class="row recommend-item">
+            <% @random.each do |item| %>
+            <div class="col-ml">
+            <% if item.is_active == true %>
+            <%= link_to @item_path do %>
+            <% if item.image.attached? %>
+            <%= image_tag item.image, size: "200x150" %>
+            <% else %>
+            <%= image_tag 'no_image', size: "200x150" %>
+            <% end %><br>
+            <% end %>
+            <p><%= item.name %></p>
+            <p>¥<%= (item.price*1.1).floor.to_s(:delimited)%>(税込)</p>
+         <% end %>
+          </div>
+         <% end %>
+        </div>
+        </div>
+      <div class="recommend-more"><%= link_to "すべての商品を見る>>", @items_path %></div>
+    </div>
+  </div>
+</div>
+<%= link_to destroy_customer_session_path, method: :delete, class:"nav-link text-center" do %>簡易ログアウト<% end %>

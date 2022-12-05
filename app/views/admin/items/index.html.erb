@@ -1,14 +1,21 @@
 <!--% provide(:title, "商品一覧") %-->
-<h2 class="head-line title_h2 text-center admin_product_index">商品一覧</h2>
+
+<div class="container">
 <div class="row">
   <div class="col-xs-10 col-xs-offset-1">
-    <%= link_to new_admin_item_path, data: {"turbolinks" => false}, class: "btn btn-warning pull-right new_item" do %>
+    <div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+    <h2 class="head-line title_h2 text-left admin_product_index "><span class="bg-light">商品一覧</span></h2>
+    </div>
+    <div class="col-lg-1">
+    <%= link_to new_admin_item_path, data: {"turbolinks" => false}, class: "rounded-circle btn btn-light pull-right new_item" do %>
     <i class="fas fa-plus"></i>
-    新規商品登録
     <% end %>
+    </div>
+    </div>
     <table class="table table-hover table-bordered table-condensed">
       <thead>
-        <tr class="info">
+        <tr class="info bg-light">
           <th>商品ID</th>
           <th>商品名</th>
           <th>税抜価格</th>
@@ -35,9 +42,9 @@
             </td>
             <td class="col-xs-2">
               <% if item.is_active == true %>
-      					<p><i class="fas fa-bullseye red"></i>販売中</p>
+      					<p class="text-success">販売中</p>
       				<% elsif item.is_active == false %>
-      					<p><i class="fas fa-bullseye blue"></i>販売停止中</p>
+      					<p class="text-Secondary">販売停止中</p>
       				<% end %>
             </td>
           </tr>
@@ -46,4 +53,5 @@
     </table>
   </div>
     <div class="text-center"><%= paginate(@items) %></div>
+</div>
 </div>

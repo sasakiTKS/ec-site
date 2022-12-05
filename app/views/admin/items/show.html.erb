@@ -1,8 +1,12 @@
 <!--% provide(:title, "商品詳細") %-->
-<h2 class="head-line title_h2 text-center">商品詳細</h2>
+
+<div class="container">
 <div class="row">
-	<div class="col-xs-12">
-	  <div class="col-xs-4">
+<h2 class="head-line title_h2 col-xs-8 col-xs-offset-4 bg-light">商品詳細</h2>
+</div>
+<div class="row">
+	<div class="col-xs-12 form-inline">
+	  <div class="col-xs-3 col-xs-offset-3">
 	    <div id="img_field">
 	          <!--%= attachment_image_tag(@product, :image, size: "300x220", fallback: "no_image.jpg") %-->
 	          <% if @item.image.attached? %>
@@ -10,26 +14,28 @@
             <% else %>
             <%= image_tag 'no_image', size: "200x150" %>
             <% end %>
+            </div>
+      </div>
       </div>
       <div class="col-xs-6">
 	      <div class="field">
 					<p>
-						商品名<%= @item.name %>
+						商品名&emsp;<%= @item.name %>
 					</p>
 	      </div><br>
 	      <div class="field">
 					<p>
-						商品説明<%= @item.introduction %>
+						商品説明&emsp;<%= @item.introduction %>
 					</p><br>
 	      </div>
 	      <div class="field">
 					<p>
-						ジャンル<%= @item.genre.name %>
+						ジャンル&emsp;<%= @item.genre.name %>
 					</p><br>
 	      </div>
 	      <div class="field">
 					<p>
-						税込価格<%= @item.add_tax_price.to_s(:delimited) %>(<%= @item.price.to_s(:delimited) %>) 円<br>
+						税込価格&emsp;<%= @item.add_tax_price.to_s(:delimited) %>(<%= @item.price.to_s(:delimited) %>) 円<br>
 						(税抜価格)
 					</p><br>
 	      </div>
@@ -37,9 +43,9 @@
 					<p>
 						販売ステータス
 		        <% if @item.is_active == true %>
-							　<i class="fas fa-bullseye red"></i>販売中
+							　<i class="text-success">販売中</i>
 						<% elsif @item.is_active == false %>
-							　<i class="fas fa-bullseye blue"></i>販売停止中
+							　<i class="text-danger">販売停止中</i>
 						<% end %>
 					</p>
 	      </div>
@@ -48,4 +54,5 @@
       	  </div>
       	</div>
     </div>
+</div>
 </div>

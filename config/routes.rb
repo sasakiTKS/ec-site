@@ -15,11 +15,12 @@ devise_for :customers,skip: [:passwords], controllers: {
   sessions: 'public/sessions'
 }
   namespace :public do
-    get 'homes/top'
-    get 'homes/about'
+   root to: 'homes#top'
+   get "about" => "homes#about", as: "about"
   end
 end
   # devise_for :admins
   # devise_for :customers
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
+  
+  
