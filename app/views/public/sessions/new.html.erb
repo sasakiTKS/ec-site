@@ -1,26 +1,34 @@
-<h2>Log in</h2>
+<!--% provide(:title, "ログイン") %-->
+<div class="container">
+<div class="row">
+  <div class="col-xs-offset-1 col-xs-11">
+    <h2 class="head-line title_h2 text-left"><span class="bg-light">ログイン</span></h2></br>
+    <h4 class="head-line title_h4 text-center bg-light">会員の方はこちらからログイン</h4>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= form_with model: @customer, url: new_session_path(resource_name), id: 'new_customer', class: 'new_customer', local: true do |f| %>
+       <div class="field">
+    メールアドレス&emsp;
+    <%= f.email_field :email, autofocus: true, :placeholder => "sample@sample.com", autocomplete: "email" %>
   </div>
-
+  </br>
   <div class="field">
-    <%= f.label :password %><br />
+    パスワード&emsp;
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
+  <br>
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "ログイン", class:"btn btn-primary" %>
   </div>
 <% end %>
+</br>
+    <div class="col-xs-9">
+      <h4 class="head-line title_h2 text-left bg-light">登録がお済みではない方</h4>
+      <p class="new-link">
+        <%= link_to "こちら", new_registration_path(resource_name), data: {"turbolinks" => false}, class: "btn-link",style: "text-decoration: underline" %>から新規登録を行ってください。
+      </p>
+    </div>
+  </div>
+</div>
+</div>
 
-<%= render "public/shared/links" %>
+<!--%= render "public/shared/links" %-->

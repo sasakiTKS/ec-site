@@ -17,6 +17,7 @@ devise_for :customers,skip: [:passwords], controllers: {
   namespace :public do
    root to: 'homes#top'
    get "about" => "homes#about", as: "about"
+   resources :customers,only: [:show,:edit,:update,]
   end
 end
   # devise_for :admins
