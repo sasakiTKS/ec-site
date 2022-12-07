@@ -17,11 +17,11 @@ devise_for :customers,skip: [:passwords], controllers: {
   namespace :public do
    root to: 'homes#top'
    get "about" => "homes#about", as: "about"
-   resources :customers,only: [:show,:edit,:update,]
+   get "customers/my_page" => "customers#show", as: "customers/:id"
+   resources :customers,only: [:edit,:update,]
   end
 end
   # devise_for :admins
   # devise_for :customers
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  
-  
+
