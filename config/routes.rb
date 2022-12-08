@@ -17,8 +17,10 @@ devise_for :customers,skip: [:passwords], controllers: {
   namespace :public do
    root to: 'homes#top'
    get "about" => "homes#about", as: "about"
-   get "customers/my_page" => "customers#show", as: "customers/:id"
-   resources :customers,only: [:edit,:update,]
+   resources :customers,only: [:show,:edit,:update,]
+   get '/customers/:id/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
+   patch '/customers/:id/withdrawal' => 'customers#withdrawal', as: 'withdrawal'
+   resources :addresses,only: [:index,:create,:edit,:update,:destroy]
   end
 end
   # devise_for :admins

@@ -7,7 +7,7 @@
       <%= @customer.decorate.full_name %>さんの会員情報編集
     </h2>
 
-  <%= form_with model: @customer, url:admin_customer_path, local: true ,method: :patch do |f| %>
+  <%= form_with model: @customer, url: admin_customer_path, local: true ,method: :patch do |f| %>
 
     <div class="col-xs-10">
       <div class="form-group col-xs-9">

@@ -1,19 +1,17 @@
 class Public::CustomersController < ApplicationController
-  
+
+
+  def withdrawal
+    @customer = Customer.find(params[:id])
+    # is_deletedカラムをtrueに変更することにより削除フラグを立てる
+    @customer.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to new_customer_registration_path
+  end
+
   def show
     @customer = Customer.find(params[:id])
-	end
-
-	def quit
-	end
-
-	def out
-    @customer = current_customer
-    @customer.update(is_valid: true)
-
-    reset_session
-    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
-    redirect_to root_path
 	end
 
 	def edit
@@ -30,7 +28,7 @@ class Public::CustomersController < ApplicationController
     end
 	end
 
-  def contact
+  def unsubscribe
   end
 
 	private
