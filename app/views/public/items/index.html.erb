@@ -1,0 +1,40 @@
+
+<% provide(:title, "商品一覧") %>
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1">
+		<h2 class="product-headline head-line title_h2 text-center">
+		商品一覧
+		<span>
+			(全<%= @items.total_count %>件中　<%= @items.count %>件)
+		</span>
+		</h2>
+			<div class="clearfix item-box">
+				<% @items.each do |item| %>
+				  
+      <% if item.genre.is_active == true %>
+      <div class="item-container">
+
+      <%= link_to public_item_path(item.id), class: "btn-link", :style=>"color:#0099FF;" do %>
+      <div id="img_field" class="item">
+        <% if @item.image.attached? %>
+            <%= image_tag @item.image, size: "200x150" %>
+            <% else %>
+            <%= image_tag 'no_image', size: "200x150" %>
+            <% end %>
+      </div>
+      <p class="products-name">
+        <%= item.name %>
+      </p>
+      <% end %>
+      <% if item.is_active == true %>
+      <p>¥<%= item.price.to_s(:delimited) %></p>
+      <% elsif item.is_active == false %>
+      <p class="soldout">売り切れ中</p>
+      <% end %>
+      </div>
+      <% end %>
+				<% end %>
+			</div>
+			 <div class="text-center"><%= paginate(@items) %></div>
+	</div>
+</div>

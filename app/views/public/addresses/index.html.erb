@@ -1,65 +1,77 @@
-<!--% provide(:title, "配送先登録/一覧") %-->
+<div class="container">
 <div class="row">
-    <div class="col-xs-12">
-        <h2 class="head-line text-center title_h2">配送先登録/一覧</h2>
-        <div id="error">
-          <%= render "layouts/error_messages", resource: @address %>
+
+    <div class="col-lg-10 col-xs-offset-1 title">
+        <h2 class="bg-origin">配送先編集/一覧</h2>
+    </div>
+</div>
+      <% if @address.errors.any? %>
+      <%= address.errors.count %>prohibited this obj from being saved:
+        <% address.errors.full_messages.each do |error| %>
+      <%= error %>
+      <% end %>
+      <% end %>
+      <%= form_with model: @address, url: public_addresses_path do |f| %>
+
+        <div class="row">
+          <div class="col-xs-3">
+            <%= f.label :"郵便番号（ハイフンなし）" %>
+          </div>
+          <div class="col-lg-4">
+            <%= f.text_field :postal_code, class: "col-xs-6" %>
+          </div>
         </div>
-        <%= form_with model: @addresses, url: public_addresses_path do |f| %>
-            <div class="addres col-xs-10">
-                <div class="form-group col-xs-12">
-                    <%= f.label :"郵便番号(ハイフンなし)" ,class: "col-xs-3 control-label" %>
-                    <%= f.text_field :postal_code, class: "col-xs-4 form-control-static postal_code" %>
-                </div>
 
-                <div class="form-group col-xs-12">
-                    <%= f.label :"住所" ,class: "col-xs-3 control-label" %>
-                    <%= f.text_field :address, class: "col-xs-7 form-control-static address" %>
-                </div>
-
-                <div class="form-group col-xs-12">
-                    <%= f.label :"宛名" ,class: "col-xs-3 control-label" %>
-                    <%= f.text_field :name, class: "col-xs-4 form-control-static name" %>
-                </div>
-                <%= f.submit '登録する' ,class: "col-xs-2 pull-right btn-lg btn-success " %>
+        <div class="row">
+          <div class="col-xs-3">
+            <%= f.label :"住所" %>
+          </div>
+          <div class="col-lg-4">
+            <%= f.text_field :address, class: "col-xs-12" %>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <%= f.label :"宛名" %>
             </div>
+            <div class="col-lg-4">
+                <%= f.text_field :name, class: "col-xs-6" %>
+            </div>
+            <div class="col-lg-4">
+              <%= f.submit '登録する',class: "btn col-xs-5 btn-success" %>
+            </div>
+        </div>
+
         <% end %>
 
-        <div id="create">
-          <% if @addresses.present? %>
-  <table class="table table-hover table-bordered">
-    <thead>
-        <tr class="info">
-            <th>郵便番号</th>
-            <th>住所</th>
-            <th>宛名</th>
-            <th colspan="2"></th>
-        </tr>
-    </thead>
-
-    <tbody>
+  <div class="row">
+    <div>
+      <div class="row">
+ <div class="col-xs-8">
+ <table class="table ship-city-table">
+  <thead>
+    <tr>
+     <th class="active">郵便番号</th>
+     <th class="active">住所</th>
+     <th class="active">宛名</th>
+     <th class="active", colspan="2"></th>
+    </tr>
+  </thead>
+   <tbody>
       <% @addresses.each do |address| %>
-        <tr class="tr" id="destroy-<%= address.id %>">
-            <td>
-                <%= address.postal_code %>
-            </td>
-            <td class="text-left">
-                <%= address.address %>
-            </td>
-            <td class="text-left">
-                <%= address.name %>
-            </td>
-            <td>
-                <%= link_to "編集する",edit_customers_address_path(address), class: "glyphicon glyphicon-pencil btn-sm btn-primary" %>
-            </td>
-            <td>
-                <%= link_to "削除する",customers_address_path(address), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, remote: true, class: "glyphicon glyphicon-trash btn-sm btn-danger destroy_book_#{address.id}" %>
-            </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
-        </div>
+    <tr>
+      <td><%= address.postal_code %></td>
+      <td class="text-left"><%= address.address %></td>
+      <td class="text-left"><%= address.name %></td>
+      <td class="text-center"><%= link_to "編集する", edit_public_address_path(address), class: "btn btn-primary" %>
+        <%= link_to "削除する", public_address_path(address), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure?"}, remote:true %>
+      </td>
+    </tr>
+    <% end %>
+   </tbody>
+</table>
+ </div>
+</div>
     </div>
+  </div>
 </div>
