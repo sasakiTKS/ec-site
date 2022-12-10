@@ -8,16 +8,16 @@
 			(全<%= @items.total_count %>件中　<%= @items.count %>件)
 		</span>
 		</h2>
-			<div class="clearfix item-box">
-				<% @items.each do |item| %>
-				  
-      <% if item.genre.is_active == true %>
+		<div class="clearfix item-box">
+		<% @items.each do |item| %>
+
+
       <div class="item-container">
 
       <%= link_to public_item_path(item.id), class: "btn-link", :style=>"color:#0099FF;" do %>
       <div id="img_field" class="item">
-        <% if @item.image.attached? %>
-            <%= image_tag @item.image, size: "200x150" %>
+        <% if item.image.attached? %>
+            <%= image_tag item.image, size: "200x150" %>
             <% else %>
             <%= image_tag 'no_image', size: "200x150" %>
             <% end %>
@@ -32,9 +32,9 @@
       <p class="soldout">売り切れ中</p>
       <% end %>
       </div>
-      <% end %>
-				<% end %>
-			</div>
-			 <div class="text-center"><%= paginate(@items) %></div>
+
+		<% end %>
+		</div>
+		<div class="text-center"><%= paginate(@items) %></div>
 	</div>
 </div>
