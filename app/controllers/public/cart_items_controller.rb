@@ -7,7 +7,7 @@ class Public::CartItemsController < ApplicationController
     @cart_items = current_customer.cart_items
     @items = Item.all
     @genres = Genre.all
-    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
+    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_price }
   end
 
   def update
@@ -27,7 +27,13 @@ class Public::CartItemsController < ApplicationController
     if @cart_item.save
       flash[:notice] = "#{@cart_item.item.name}をカートに追加しました。"
       redirect_to public_cart_items_path
-  　end
+    else
+      @item = Item.find(params[:cart_item][:item_id])
+      @cart_item = CartItem.new
+      flash[:alert] = "個数を選択してください。"
+      render "customer/items/show"
+    end
+  end
 
   def destroy
     @cart_item = CartItem.find(params[:id])

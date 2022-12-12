@@ -1,7 +1,7 @@
 </br><div class="container">
 <h3><span class=bg-light>管理者ログイン</span></h3></br>
-
 <%= form_with model: @admin, url: new_session_path(resource_name), id: 'new_admin', class: 'new_admin', local: true do |f| %>
+ <%= render "layouts/error_messages", resource: resource %>
   <div class="field">
     メールアドレス&emsp;
     <%= f.email_field :email, autofocus: true, :placeholder => "sample@sample.com", autocomplete: "email" %>

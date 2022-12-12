@@ -14,10 +14,8 @@ class Public::OrdersController < ApplicationController
   def confirm
     @cart_items = current_customer.cart_items
     @order = Order.new
-
-
      if params[:order][:address] == "address"
-      @order.postcode = current_customer.postcode
+      @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.destination = current_customer.last_name + current_customer.first_name
      elsif params[:order][:addresses] == "registration"

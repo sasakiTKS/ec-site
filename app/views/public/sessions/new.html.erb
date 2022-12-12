@@ -3,9 +3,9 @@
   <div class="col-xs-offset-1 col-xs-11">
     <h2 class="head-line title_h2 text-left"><span class="bg-light">ログイン</span></h2></br>
     <h4 class="head-line title_h4 text-center bg-light">会員の方はこちらからログイン</h4>
-
     <%= form_with model: @customer, url: new_session_path(resource_name), id: 'new_customer', class: 'new_customer', local: true do |f| %>
-       <div class="field">
+    <%= render "layouts/error_messages", resource: resource %>
+  <div class="field">
     メールアドレス&emsp;
     <%= f.email_field :email, autofocus: true, :placeholder => "sample@sample.com", autocomplete: "email" %>
   </div>

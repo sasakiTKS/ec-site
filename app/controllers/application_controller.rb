@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   # before_action作成
 
   def set_item
-    @product = Product.find(params[:id])
+    @item = Item.find(params[:id])
   end
 
   def set_customer

@@ -6,6 +6,9 @@ class Item < ApplicationRecord
   def taxin_price
         (price*1.1).round
   end
+  def tax_price
+        (price*1.0).round
+  end
   validates :image, presence: true
   validates :name, presence: true
   validates :introduction, presence: true
