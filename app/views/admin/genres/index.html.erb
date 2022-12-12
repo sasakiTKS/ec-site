@@ -1,12 +1,10 @@
-<!--% provide(:title, "ジャンル一覧・追加") %-->
-<div class="container">
+</br><div class="container">
 <div class="row">
   <div class="col-xs-12">
-    <h3 class="head-line title_h2 text-center bg-light" >ジャンル一覧・追加</h3>
+    <h3 class="head-line title_h2 text-left " ><span class="bg-light" >ジャンル一覧・追加</span></h3>
     <%= render "layouts/error_messages", resource: @genre %>
     <div class="col-xs-offset-1">
       <%= form_with model: @genre, url: admin_genres_path, class: "form-inline", local: true do |f| %>
-        <!--%= form_for @genre, :url => {:action => :create} do |f| %-->
           ジャンル名
           <%= f.text_field :name, :placeholder => "ジャンル名" %>
           <%= f.submit "新規登録", class: "btn btn-success" %>

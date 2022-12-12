@@ -1,5 +1,6 @@
 class Admin::ItemsController < ApplicationController
   before_action :set_genres, only: [:new, :edit, :index, :create, :update]
+  before_action :authenticate_admin!
 
   def new
     @item = Item.new
@@ -30,7 +31,7 @@ class Admin::ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
-      flash[:success] = "商品内容をを変更しました"
+      flash[:notice] = "商品内容をを変更しました"
       redirect_to admin_item_path(@item)
     else
       render :edit

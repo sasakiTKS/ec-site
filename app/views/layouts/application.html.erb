@@ -1,17 +1,103 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EcSite</title>
-    <!--meta name="viewport" content="width=device-width,initial-scale=1"-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>NaganoCake</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300&display=swap" rel="stylesheet">
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+ <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+
+        <div class="container">
+          <a class="Logo navbar-brand p-3 " href="/">
+            <%= link_to @public_path, class:"header-title " do %>
+             <div>ながのCAKE</div>
+            <% end %>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav lists-right">
+              <% if customer_signed_in? %>
+
+                <li class= "nav-item">
+                 <button class="btn btn-default"> <%= link_to "マイページ", public_customer_path(current_customer), class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+
+                <li class= "nav-item">
+                  <button class="btn btn-default"><%= link_to "商品一覧", public_items_path, class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+
+                <li class= "nav-item">
+                  <button class="btn btn-default"><%= link_to "カート", public_cart_items_path, class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="btn btn-default"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+
+              <% elsif admin_signed_in? %>
+                <li class= items>
+                  <button class="btn btn-default"><%= link_to '商品一覧', admin_items_path, class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+
+                <li class= customers>
+                  <button class="btn btn-default"><%= link_to '会員一覧', admin_customers_path, class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+
+                <li class=orders>
+                  <button class="btn btn-default"><%= link_to '注文履歴一覧', admin_path, class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+
+                <li class=genres>
+                  <button class="btn btn-default"><%= link_to 'ジャンル一覧', admin_genres_path, class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+
+                <li class=logout>
+                  <button class="btn btn-default"><%= link_to "ログアウト",destroy_admin_session_path, method: :delete, class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+
+              <% else %>
+                <li class= "nav-item">
+                  <button class="btn btn-default"><%= link_to "About", public_about_path, class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+
+                 <li class= "nav-item">
+                   <button class="btn btn-default"><%= link_to "商品一覧", public_items_path, class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+
+                <li class= "nav-item">
+                  <button class="btn btn-default"><%= link_to "新規登録", new_customer_registration_path, class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+
+                <li class= "nav-item">
+                 <button class="btn btn-default"><%= link_to "ログイン", new_customer_session_path, class: "link glyphicon glyphicon-pencil btn btn-default pull-right" %></button>
+                </li>
+              <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="mb-auto" style="font-family: 'Kiwi Maru', serif;">
+    <%= notice %>
     <%= yield %>
+    </main>
+
   </body>
+
+
 </html>
