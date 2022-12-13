@@ -13,21 +13,19 @@
         </tr>
         </thead>
         <tbody>
-         <% @cart_items.each do |cart| %>
+         <% @cart_items.each do |cart_item| %>
           <tr>
             <td class="border border-dark">
-              <% if cart.item.image.attached? %>
-              <%= image_tag cart.item.image, size: "200x150" %>
+              <% if cart_item.item.image.attached? %>
+              <%= image_tag cart_item.item.image, size: "50x50" %>
               <% else %>
-              <%= image_tag 'no_image', size: "200x150" %>
+              <%= image_tag 'no_image', size: "50×50" %>
               <% end %>
-              <%= cart.item.name %>
+              <%= cart_item.item.name %>
             </td>
-            <td class="border border-dark">
-
-            </td>
-            <td class="border border-dark"><%= cart.amount %></td>
-            <td class="border border-dark"></td>
+            <td class="border border-dark"><% item_price= cart_item.item.price*1.0 %><%= item_price.round.to_s(:delimited)%></td>
+            <td class="border border-dark"><%= cart_item.amount.round %></td>
+            <td class="border border-dark"><%= cart_item.sum_price.round.to_s(:delimited) %></td>
           </tr>
          <% end %>
         </tbody>
@@ -41,11 +39,11 @@
         </tr>
         <tr>
             <th class="table-active border border-dark">商品合計</th>
-            <td class="border border-dark"><%=  %></td>
+            <td class="border border-dark"><%= @sum.round.to_s(:delimited) %></td>
         </tr>
         <tr>
             <th class="table-active border border-dark">請求金額</th>
-            <td class="border border-dark"><%=  %></td>
+            <td class="border border-dark"><%= @total.round.to_s(:delimited) %></td>
         </tr>
      </table>
    </div>
@@ -58,7 +56,7 @@
  </div>
  <div>
      <strong>お届け先</strong>
-     <span class="pl-3"><%= "#{@order.postal_code} #{@order.address} #{@order.name}" %></span>
+     <span class="pl-3">〒<%= "#{@order.postal_code} #{@order.address} #{@order.name}" %></span>
  </div>
 
 
