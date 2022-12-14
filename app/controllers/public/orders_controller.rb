@@ -16,11 +16,11 @@ class Public::OrdersController < ApplicationController
 
     if @order.save
       @cart_items.each do |cart_item|
-        order_item = OrderDetail.new
-        order_item.item_id = cart_item.item_id
-        order_item.order_id = @order.id
-        order_item.amount = cart_item.amount
-        order_item.save
+        order_detail = OrderDetail.new
+        order_detail.item_id = cart_item.item_id
+        order_detail.order_id = @order.id
+        order_detail.amount = cart_item.amount
+        order_detail.save
       end
       redirect_to  complete_public_orders_path
       @cart_items.destroy_all
@@ -30,7 +30,7 @@ class Public::OrdersController < ApplicationController
       @address = Address.new
       render :new
     end
-  end
+   end
 
    def confirm
 
@@ -53,10 +53,10 @@ class Public::OrdersController < ApplicationController
       @order.address = params[:order][:address]
       @order.postal_code = params[:order][:postal_code]
     end
-
+    @order.shipping_cost = "800"
     @sum = @cart_items.inject(0) { |sum, item| sum + item.sum_price }
     @total = @cart_items.inject(0) { |sum, item| sum + item.sum_price }
-    @total += @order.shipping_cost.to_i
+    @total += @order.shipping_cost
 
    end
 
@@ -66,7 +66,6 @@ class Public::OrdersController < ApplicationController
   def index
     @orders = Order.all
     @items = Item.all
-    @total = @orders.inject(0) { |sum, item| sum + item.sum_order_items }
   end
 
 	def show

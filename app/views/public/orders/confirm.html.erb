@@ -66,15 +66,14 @@
           <%= f.hidden_field :address %>
           <%= f.hidden_field :name %>
           <%= f.hidden_field :payment_method %>
-          <%= f.hidden_field :price %>
-          <%= f.hidden_field :delivery, value:@delivery %>
+           <%= f.hidden_field :total_amount, :value => @total.round %>
+          <%= f.hidden_field :shipping_cost, :value => @order.shipping_cost %>
           <%= f.submit "注文を確定する", class: "btn btn-info" %>
         <% end %>
     </div>
       <% else %>
-          <!-- if カートアイテムがない時 -->
           <p>お客様のショッピングカートに商品はありませんので注文確定ができません。</p>
-          <p><%= link_to "商品一覧", customer_items_path %>から商品をお探し下さい。</p>
+          <p><%= link_to "商品一覧", public_items_path %>から商品をお探し下さい。</p>
       <% end %>
    </div>
 </div>

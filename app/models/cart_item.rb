@@ -8,4 +8,7 @@ class CartItem < ApplicationRecord
   def sum_price
     item.tax_price * amount
   end
+  def sub_price(sub)
+    (taxf_price(sub.item.tax_out_price) * sub.amount)
+  end
 end
