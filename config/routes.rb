@@ -9,7 +9,9 @@ namespace :admin do
     resources :genres,only: [:index,:create,:edit,:update]
     resources :customers,only: [:index,:show,:edit,:update]
     resources :orders,only: [:index,:show,:edit,:update] do
+     collection do
      resources :order_details, only: [:update,:show]
+    end
     end
  end
 # 顧客用# URL /customers/sign_in ...
