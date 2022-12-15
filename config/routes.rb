@@ -8,7 +8,9 @@ namespace :admin do
     resources :items,only: [:index,:create,:edit,:update,:show,:new]
     resources :genres,only: [:index,:create,:edit,:update]
     resources :customers,only: [:index,:show,:edit,:update]
-    resources :orders,only: [:index,:show,:edit,:update]
+    resources :orders,only: [:index,:show,:edit,:update] do
+     resources :order_details, only: [:update,:show]
+    end
  end
 # 顧客用# URL /customers/sign_in ...
 devise_for :customers,skip: [:passwords], controllers: {

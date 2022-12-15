@@ -8,7 +8,7 @@
       退会する場合は,「退会する」をクリックしてください。
     </div>
   <%= link_to "退会しない", public_customer_path , class: "btn btn-primary btn-lg"%>
-  <%= link_to "退会する",  public_withdrawal_path, method: :patch, data: { confilm: "本当に退会しますか？" }, class: "btn btn-danger btn-lg" %>
+  <%= link_to "退会する",  public_withdrawal_path, method: :patch, data: { confirm: "本当に退会しますか？" }, class: "btn btn-danger btn-lg" %>
 </div>
 </div>
 </div>
