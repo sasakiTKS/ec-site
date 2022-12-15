@@ -44,9 +44,7 @@
             <tr>
               <th class="info">商品合計</th>
               <td class="text-right col-xs-5">
-                <% @order_details.each do |order_detail| %>
-                <%= order_detail.item.price * order_detail.amount %>円
-                <% end %>
+                <%= @order.unfair.to_s(:delimited)%>円
               </td>
             </tr>
             <tr>
