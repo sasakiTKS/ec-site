@@ -60,6 +60,10 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
+   def after_sign_up_path_for(_resource)
+    public_customer_path(current_customer)
+   end
+
   private
 
   def sign_up_params
